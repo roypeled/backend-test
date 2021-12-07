@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import validator from 'email-validator';
+import delay from 'delay';
 
 const PORT = process.env.PORT || 3000;
 
@@ -29,8 +30,10 @@ const emails = new Set([
 	'a@b.com',
 ]);
 
-app.get('/validate', (req, res) => {
+app.get('/validate', async (req, res) => {
 	const { email } = req.query;
+
+	await delay(Math.random()*2000 + 500);
 
 	if(!email)
 		return res
